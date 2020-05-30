@@ -54,6 +54,7 @@ char* get_last_executed();
  *
  * Parse input command into tokens using '|' and whitespace as delimiter
  * The character '|' is kept as a token in the result array
+ * Multiple words can be grouped into one token by putting in quotes
  *
  * @param input The input string
  * @param tokens Output array of tokens
@@ -64,6 +65,11 @@ char* get_last_executed();
  *     parse(input, tokens) will return 9
  *     After execution @p tokens is
  *         ["echo", "helloworld", "|", "grep", "word", "|", "cat", "|", "exit"]
+ * 
+ *     If @p input = "echo \"hello world\" | grep world"
+ *     parse(input, tokens) will return 5
+ *     After execution @p tokens is
+ *         ["echo", "hello world", "|", "grep", "world"]
  */
 int parse(char* input, char tokens[MAX_LENGTH / 2 + 1][MAX_LENGTH / 2 + 1]);
 

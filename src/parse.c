@@ -14,9 +14,20 @@ int parse(char* input, char tokens[MAX_LENGTH / 2 + 1][MAX_LENGTH / 2 + 1]) {
 		}
 		// add next token to array
 		int token_length = 0;
-		while (input[i] && !isspace(input[i]) && input[i] != '|') {
-			tokens[n_tokens][token_length++] = input[i++];
-			tokens[n_tokens][token_length] = 0;
+		if (input[i] == '\"') {
+			++i;
+			// check if token starts with a quote
+			while (input[i] && input[i] != '\"') {
+				tokens[n_tokens][token_length++] = input[i++];
+				tokens[n_tokens][token_length] = 0;
+			}
+			++i;
+		}
+		else {
+			while (input[i] && !isspace(input[i]) && input[i] != '|') {
+				tokens[n_tokens][token_length++] = input[i++];
+				tokens[n_tokens][token_length] = 0;
+			}
 		}
 		if (token_length > 0) {
 			tokens[++n_tokens][0] = 0;
